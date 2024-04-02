@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    <p>Добро пожаловать, {{ user.username }}!</p>
+    <p>Ваши группы:</p>
+    <ul>
+        {% for group_name, group in user_groups.items %}
+            <li>{{ group_name }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Войдите</p>
+{% endif %}
+
+{% for todo in todos %}
+<div>
+    <a href="{% url 'detail' todo.id %}">{{ todo.title }}"></a>
+</div>
+{% endfor %}
+
+{% endblock %}
